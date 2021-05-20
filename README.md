@@ -10,3 +10,15 @@ These components provide the structure to display onboarding screens
 **SignUp / SignIn Components**
 
 These components provide signup via Facebook, Google et al
+
+**Background Services**
+
+Geofencing Service
+Scheduler Service
+Activity Recognition
+Cloud Messaging Service
+Local Database Service
+Notification Service
+
+Google Maps
+
