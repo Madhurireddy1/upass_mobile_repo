@@ -1,0 +1,51 @@
+name: upass_mobile_repo
+description: UPASS Mobile App
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.3
+  geofence_service: ^3.0.3
+  flutter_local_notifications: ^5.0.0+4
+  ansicolor: ^2.0.1
+  logging: ^1.0.1
+  logging_appenders: ^1.0.0
+  simple_logger: ^1.8.0+1
+  google_maps_flutter: ^2.0.4
+  hive: ^2.0.4
+  hive_flutter: ^1.0.0
+  responsive_builder: ^0.4.1
+  shared_preferences: ^2.0.5
+  intl: ^0.17.0
+  http: ^0.13.3
+  uuid: ^3.0.4
+  flutter_dotenv: ^4.0.0-nullsafety.1
+  google_fonts: ^2.1.0
+  connectivity: ^3.0.3
+  permission_handler: ^7.1.0
+  page_transition: ^2.0.2
+  health: ^3.0.5
+  geocoding: ^2.0.0
+  flutter_native_timezone: ^1.0.10
+  rxdart: ^0.27.0
+  cron: ^0.3.0
+  share: ^2.0.1
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+     - assets/
