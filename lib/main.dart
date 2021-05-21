@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geofence_service/geofence_service.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:upass_mobile_repo/ui/geofence_page.dart';
+import 'package:upass_mobile_repo/on_boarding/on_boarding_main.dart';
 import 'package:upass_mobile_repo/util/notifications_service.dart';
 
 import 'util/functions_and_shit.dart';
 
-const mm = '🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽 Material App: ';
+const mm = '🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽 UPASS App: ';
 
 void main() async {
-  pp('$mm Preparing for Stanley Black & Decker $mm');
+  pp('$mm Stanley Black & Decker UPASS $mm');
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
@@ -18,7 +18,7 @@ void main() async {
     runApp(new MyApp());
   });
 
-  pp('$mm Preparation for Stanley Black & Decker started OK $mm');
+  pp('$mm Stanley Black & Decker UPASS started OK $mm');
 }
 
 class MyApp extends StatelessWidget {
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
           notificationTitle: 'Geofence Builder is RUNNING!',
           notificationText: 'Tap here to navigate to the app',
           taskCallback: _taskCallback,
-          child: GeofencePage()),
+          child: OnBoardingMain()),
     );
   }
 
