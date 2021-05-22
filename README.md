@@ -14,13 +14,13 @@ These components provide signup via Facebook, Google et al
 **Background Services**
 \
 These services manage the business logic and data management\
-\
-1. Geofencing Service\
-2. Scheduler Service\
-3. Activity Recognition\
-4. Cloud Messaging Service\
-5. Local Database Service\
-6. Notification Service\
+
+1. Geofencing Service
+2. Scheduler Service
+3. Activity Recognition
+4. Cloud Messaging Service
+5. Local Database Service
+6. Notification Service
 
 **Google Maps**\
 Display user activities on live/historical map
