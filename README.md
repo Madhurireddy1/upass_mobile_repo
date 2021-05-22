@@ -13,12 +13,12 @@ These components provide signup via Facebook, Google et al
 
 **Background Services**
 
-Geofencing Service
-Scheduler Service
-Activity Recognition
-Cloud Messaging Service
-Local Database Service
-Notification Service
+Geofencing Service/
+Scheduler Service/
+Activity Recognition/
+Cloud Messaging Service/
+Local Database Service/
+Notification Service/
 
-Google Maps
+**Google Maps**
 
