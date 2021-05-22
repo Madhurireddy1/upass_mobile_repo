@@ -22,6 +22,7 @@ class _OnBoardingMobileState extends State<OnBoardingMobile> {
       'non tempor felis. Nam rutrum rhoncus est ac venenatis.';
   static const mm = '🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽 🦋 OnBoardingMobile: 🦋 ';
   User? _user;
+  static const path  = 'assets/students/students';
 
   @override
   void initState() {
@@ -90,7 +91,7 @@ class _OnBoardingMobileState extends State<OnBoardingMobile> {
               body:
               "Pages can be full screen as well.\n\n$lorem",
               image: Image.asset(
-                'assets//students/students2.jpeg',
+                'assets/students/students2.jpg',
                 fit: BoxFit.cover,
                 height: double.infinity,
                 width: double.infinity,
@@ -108,7 +109,7 @@ class _OnBoardingMobileState extends State<OnBoardingMobile> {
               body:
               "Pages can be full screen as well.\n\n$lorem",
               image: Image.asset(
-                'assets//students/students7.jpeg',
+                'assets/students/students7.jpg',
                 fit: BoxFit.cover,
                 height: double.infinity,
                 width: double.infinity,
@@ -126,7 +127,7 @@ class _OnBoardingMobileState extends State<OnBoardingMobile> {
               body:
               "Pages can be full screen as well.\n\n$lorem",
               image: Image.asset(
-                'assets//students/students1.jpeg',
+                'assets/students/students1.jpg',
                 fit: BoxFit.cover,
                 height: double.infinity,
                 width: double.infinity,
@@ -144,7 +145,7 @@ class _OnBoardingMobileState extends State<OnBoardingMobile> {
               body:
               "Pages can be full screen as well.\n\n$lorem",
               image: Image.asset(
-                'assets//students/students8.jpeg',
+                'assets/students/students8.jpg',
                 fit: BoxFit.cover,
                 height: double.infinity,
                 width: double.infinity,
@@ -162,7 +163,7 @@ class _OnBoardingMobileState extends State<OnBoardingMobile> {
               body:
               "Pages can be full screen as well.\n\n$lorem",
               image: Image.asset(
-                'assets//students/students5.jpeg',
+                'assets/students/students5.jpg',
                 fit: BoxFit.cover,
                 height: double.infinity,
                 width: double.infinity,
@@ -193,7 +194,7 @@ class _OnBoardingMobileState extends State<OnBoardingMobile> {
               ),
               bodyWidget: Container(),
               image: Image.asset(
-                'assets//students/students6.png',
+                'assets/students/students8.jpg',
                 fit: BoxFit.cover,
                 height: double.infinity,
                 width: double.infinity,
