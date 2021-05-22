@@ -12,13 +12,19 @@ These components provide the structure to display onboarding screens
 These components provide signup via Facebook, Google et al
 
 **Background Services**
+\
+These services manage the business logic and data management\
+\
+1. Geofencing Service\
+2. Scheduler Service\
+3. Activity Recognition\
+4. Cloud Messaging Service\
+5. Local Database Service\
+6. Notification Service\
 
-Geofencing Service/
-Scheduler Service/
-Activity Recognition/
-Cloud Messaging Service/
-Local Database Service/
-Notification Service/
+**Google Maps**\
+Display user activities on live/historical map
 
-**Google Maps**
+1. Realtime Location\
+2. Geofence Registration\
 
