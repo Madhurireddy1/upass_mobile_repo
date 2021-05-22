@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:upass_mobile_repo/on_boarding/on_boarding_main.dart';
 import 'package:upass_mobile_repo/services/hive_db.dart';
 import 'package:upass_mobile_repo/util/notifications_service.dart';
+import 'package:upass_mobile_repo/ui/auth_tester.dart';
 import  'package:firebase_core/firebase_core.dart';
 import 'util/functions_and_shit.dart';
 
