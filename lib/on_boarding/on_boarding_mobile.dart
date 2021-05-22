@@ -2,10 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:upass_mobile_repo/data_models/user.dart';
 import 'package:upass_mobile_repo/ui/events_page.dart';
 import 'package:upass_mobile_repo/ui/geofence_page.dart';
 import 'package:upass_mobile_repo/util/functions.dart';
 import 'package:upass_mobile_repo/util/functions_and_shit.dart';
+import 'package:upass_mobile_repo/util/prefs.dart';
 
 import 'my_page_view_model.dart';
 
@@ -19,7 +21,21 @@ class _OnBoardingMobileState extends State<OnBoardingMobile> {
   var lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id euismod lectus, '
       'non tempor felis. Nam rutrum rhoncus est ac venenatis.';
   static const mm = '🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽 🦋 OnBoardingMobile: 🦋 ';
+  User? _user;
 
+  @override
+  void initState() {
+    super.initState();
+    _checkUser();
+  }
+  void _checkUser() async {
+    pp('$mm getting the user from shared prefs ... ');
+    _user = await  Prefs.getUser();
+    if (_user == null) {
+      pp('checkUser: 👿 👿 👿 👿 👿 👿 User has not been established yet ...'
+          ' 🦠  will prompt to  sign up or in');
+    }
+  }
   void _onIntroEnd(context) async {
     pp('$mm  _onIntroEnd: ... navigating to somewhere ...🦋 🦋 🦋 🦋 🦋 🦋 🦋 check user status ...');
 

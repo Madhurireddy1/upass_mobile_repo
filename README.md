@@ -36,3 +36,9 @@ Display user activities on live/historical map
 2. Geofence Registration
 3. Location Datastore
 
+**User Settings** 
+
+1. Privacy settings  
+2. Geofence settings  
+3. Notification settings  
+
