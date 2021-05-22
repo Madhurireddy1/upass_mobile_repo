@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geofence_service/geofence_service.dart';
@@ -6,18 +7,26 @@ import 'package:upass_mobile_repo/on_boarding/on_boarding_main.dart';
 import 'package:upass_mobile_repo/services/hive_db.dart';
 import 'package:upass_mobile_repo/util/notifications_service.dart';
 import  'package:firebase_core/firebase_core.dart';
+import 'settings/settings.dart';
 import 'util/functions_and_shit.dart';
 
 const mm = '🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽 UPASS Mobile App: ';
 
 void main() async {
-  pp('$mm Stanley Black & Decker UPASS $mm');
+  pp('$mm Stanley Black & Decker starting up .... ');
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
-    runApp(new MyApp());
+        runApp(MyApp());
+    // runApp(
+    //   DevicePreview(
+    //     enabled: kIsWeb ? false : !kReleaseMode,
+    //     builder: (_) => MyApp(),
+    //   ),
+    // );
   });
+
 
   await localDB.initializeHive();
   pp('$mm Firebase.initializeApp starting ............');
@@ -34,6 +43,8 @@ class MyApp extends StatelessWidget {
     pp('$mm NotificationService constructed ... 🍎 and hopefully initialized 🍎 $mm');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      // locale: DevicePreview.locale(context),
+      // builder: DevicePreview.appBuilder,
       theme: ThemeData(
         primarySwatch: Colors.indigo,
         textTheme: GoogleFonts.montserratAlternatesTextTheme(
