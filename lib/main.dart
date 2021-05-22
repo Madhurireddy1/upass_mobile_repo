@@ -3,16 +3,17 @@ import 'package:flutter/services.dart';
 import 'package:geofence_service/geofence_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:upass_mobile_repo/on_boarding/on_boarding_main.dart';
+import 'package:upass_mobile_repo/services/hive_db.dart';
 import 'package:upass_mobile_repo/util/notifications_service.dart';
 
 import 'util/functions_and_shit.dart';
 
-const mm = '🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽 UPASS App: ';
+const mm = '🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽 UPASS Mobile App: ';
 
 void main() async {
   pp('$mm Stanley Black & Decker UPASS $mm');
   WidgetsFlutterBinding.ensureInitialized();
-
+  localDB.initializeHive();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(new MyApp());
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.indigo,
-        textTheme: GoogleFonts.ralewayTextTheme(
+        textTheme: GoogleFonts.montserratAlternatesTextTheme(
           Theme.of(context).textTheme,
         ),
       ),

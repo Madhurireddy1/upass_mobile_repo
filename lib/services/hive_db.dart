@@ -24,6 +24,7 @@ class LocalDB {
   LocalDB._privateConstructor() {
     pp('$aa ... LocalDB._privateConstructor has been initialized : 🌺 🌺 🌺 🌺 🌺 '
         '${DateTime.now().toIso8601String()} 🌺');
+    initializeHive();
   }
 
   Future initializeHive() async {
@@ -135,6 +136,7 @@ class LocalDB {
 
   Future<List<GeofenceLocationEvent>> getGeofenceEvents() async {
     List<GeofenceLocationEvent> events = [];
+    if (geoLocationEventBox == null) await initializeHive();
     List values = geoLocationEventBox!.values.toList();
     values.forEach((element) {
       events.add(GeofenceLocationEvent.fromJson(element));
