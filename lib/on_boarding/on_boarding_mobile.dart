@@ -18,10 +18,10 @@ class _OnBoardingMobileState extends State<OnBoardingMobile> {
   final introKey = GlobalKey<IntroductionScreenState>();
   var lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id euismod lectus, '
       'non tempor felis. Nam rutrum rhoncus est ac venenatis.';
-  static const mm = '🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽 OnBoardingMobile: ';
+  static const mm = '🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽 🦋 OnBoardingMobile: 🦋 ';
 
   void _onIntroEnd(context) async {
-    pp('$mm  _onIntroEnd: ... navigating to somewhere ...🦋 check user status ...');
+    pp('$mm  _onIntroEnd: ... navigating to somewhere ...🦋 🦋 🦋 🦋 🦋 🦋 🦋 check user status ...');
 
     Navigator.push(
         context,

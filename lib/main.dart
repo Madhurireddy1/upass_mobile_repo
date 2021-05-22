@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:upass_mobile_repo/on_boarding/on_boarding_main.dart';
 import 'package:upass_mobile_repo/services/hive_db.dart';
 import 'package:upass_mobile_repo/util/notifications_service.dart';
-
+import  'package:firebase_core/firebase_core.dart';
 import 'util/functions_and_shit.dart';
 
 const mm = '🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽 UPASS Mobile App: ';
@@ -13,13 +13,17 @@ const mm = '🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽 UPASS Mobile App: '
 void main() async {
   pp('$mm Stanley Black & Decker UPASS $mm');
   WidgetsFlutterBinding.ensureInitialized();
-  localDB.initializeHive();
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(new MyApp());
   });
 
-  pp('$mm Stanley Black & Decker UPASS started OK $mm');
+  await localDB.initializeHive();
+  pp('$mm Firebase.initializeApp starting ............');
+  await Firebase.initializeApp();
+  pp('$mm Firebase.initializeApp executed 🍎 🍎 OK 🍎 🍎 ');
+  pp('$mm Stanley Black & Decker UPASS Mobile App started 🍎 🍎 OK 🍎 🍎 ');
 }
 
 class MyApp extends StatelessWidget {

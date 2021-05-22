@@ -9,7 +9,13 @@ These components provide the structure to display onboarding screens
 
 **SignUp / SignIn Components**
 
-These components provide signup via Facebook, Google et al
+These components provide signup via  
+
+1. Facebook   
+2. Google   
+3. Twitter
+4. Email  
+5. Phone 
 
 **Background Services**
 \
@@ -22,9 +28,11 @@ These services manage the business logic and data management\
 5. Local Database Service
 6. Notification Service
 
-**Google Maps**\
+**Google Maps**  
+
 Display user activities on live/historical map
 
-1. Realtime Location\
-2. Geofence Registration\
+1. Realtime Location
+2. Geofence Registration
+3. Location Datastore
 
