@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:geofence_service/geofence_service.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:upass_mobile_repo/auth/auth_firebase.dart';
 import 'package:upass_mobile_repo/data_models/geofence_location.dart';
+import 'package:upass_mobile_repo/data_models/user.dart';
 import 'package:upass_mobile_repo/scanning/scannee.dart';
 import 'package:upass_mobile_repo/scanning/scanner.dart';
 import 'package:upass_mobile_repo/services/cron_service.dart';
@@ -50,6 +52,7 @@ class _GeofencePageState extends State<GeofencePage> with SingleTickerProviderSt
     });
   }
 
+  // ignore: cancel_subscriptions
   StreamSubscription<ConnectivityResult>? _subscription;
   Position? _position;
   bool busy = false;
@@ -69,7 +72,9 @@ class _GeofencePageState extends State<GeofencePage> with SingleTickerProviderSt
     connected = await checkNetworkConnectivity();
     pp('$mm ....................................'
         ' checkNetworkConnectivity: 🍐 🍐 🍐 connected: 💪 $connected 💪 ');
+
     if (connected) {
+      _checkUser();
       _listen();
       await _startFences();
       await _getEvents();
@@ -80,7 +85,7 @@ class _GeofencePageState extends State<GeofencePage> with SingleTickerProviderSt
   void _listen() {
     pp('$mm ..... _listen: 🍐 🍐 🍐 listenToBackgroundLocation and onConnectivityChanged ....  🍐 ');
     _subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      p('$mm Got a new connectivity status! ${result.toString()}');
+      p('$mm Got a new connectivity status! 🔊 🔊  🔊 ${result.toString()} 🔊 🔊 🔊');
       if (result == ConnectivityResult.mobile || result == ConnectivityResult.wifi) {
         setState(() {
           connected = true;
@@ -92,6 +97,30 @@ class _GeofencePageState extends State<GeofencePage> with SingleTickerProviderSt
         });
       }
     });
+  }
+
+  User? user;
+  void _checkUser() async {
+    pp('$mm ... _checkUser for Firebase Authentication status ...');
+    var ok = await authService.isUserAuthenticated();
+    if (!ok) {
+      pp('$mm create a user with anonymize credentials ...');
+      var email = 'upass_${DateTime.now().millisecondsSinceEpoch}@upass.com';
+      var password = 'upassTemp';
+      try {
+        user = await authService.createUser(email: email, password: password);
+        authService.listenForAuthenticationChanges(onAuthChanged: onAuthChanged);
+      } catch (e) {
+        pp('$mm $e');
+      }
+    } else {
+      pp('$mm  ✅  ✅  ✅ we good for this, Boss! we are official on Firebase Auth  ✅ ');
+    }
+    setState(() {});
+  }
+
+  void onAuthChanged(bool isOK) async {
+    pp('$mm 🍅 🍅 🍅  onAuthChanged: user is authenticated: 🍅 $isOK 🍅');
   }
 
   Future _getEvents() async {

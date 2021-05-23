@@ -52,6 +52,7 @@ dependencies:
   qr_flutter: ^4.0.0
   scan: ^1.4.3
   images_picker: ^1.2.4
+  overlay_support: ^1.2.1
 
 dev_dependencies:
   flutter_test:

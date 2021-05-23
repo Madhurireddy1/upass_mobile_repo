@@ -20,6 +20,7 @@ class _ScanneeState extends State<Scannee> {
     fakeUser = User(
         email: 'aubrey@aftarobot.com',
         cellphone: '065 591  7675',
+        token: 'TBD',
         date: DateTime.now().toIso8601String(),
         userId: uuid.toString());
   }
@@ -51,9 +52,7 @@ class _ScanneeState extends State<Scannee> {
                         height: 8,
                       ),
                       QrImage(
-                        data: fakeUser == null
-                            ? ""
-                            : fakeUser!.toJson().toString(),
+                        data: fakeUser == null ? "" : fakeUser!.toJson().toString(),
                         version: QrVersions.auto,
                         size: 240.0,
                       ),

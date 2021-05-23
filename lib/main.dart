@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geofence_service/geofence_service.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:upass_mobile_repo/messaging/messaging_service.dart';
 import 'package:upass_mobile_repo/on_boarding/on_boarding_main.dart';
 import 'package:upass_mobile_repo/services/hive_db.dart';
 import 'package:upass_mobile_repo/util/notifications_service.dart';
 
 import 'util/functions_and_shit.dart';
 
-const mm = '🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽 💙 UPASS Mobile App: 💙 ';
+const mm = '🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽 💪 💙 UPASS Mobile App: 💙 💪';
 
 void main() async {
   pp('$mm Stanley Black & Decker starting up .... ');
   WidgetsFlutterBinding.ensureInitialized();
 
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
     runApp(MyApp());
     // runApp(
     //   DevicePreview(
@@ -30,6 +30,8 @@ void main() async {
   pp('$mm Firebase.initializeApp starting ............');
   await Firebase.initializeApp();
   pp('$mm Firebase.initializeApp executed 🍎 🍎 OK 🍎 🍎 ');
+  await messagingService.initialize();
+  pp('$mm messagingService initialized 🍎 🍎 OK 🍎 🍎 ');
   pp('$mm Stanley Black & Decker UPASS Mobile App started 🍎 🍎 OK 🍎 🍎 ');
 }
 

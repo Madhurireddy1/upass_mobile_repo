@@ -3,8 +3,7 @@ class GeofenceLocation {
   double? latitude, longitude;
   double? radius;
 
-  GeofenceLocation(
-      {this.locationId, this.name, this.latitude, this.longitude, this.radius});
+  GeofenceLocation({this.locationId, this.name, this.latitude, this.longitude, this.radius});
 
   GeofenceLocation.fromJson(Map data) {
     this.locationId = data['locationId'];
@@ -33,10 +32,10 @@ class GeofenceLocation {
 }
 
 class GeofenceLocationEvent {
-  String? eventId;
+  String? eventId, userId;
   String? date;
   GeofenceLocation? geofenceLocation;
-  bool? entered, dwelled, exited;
+  bool? entered, dwelled, exited, ok;
   double? radius;
 
   GeofenceLocationEvent(
@@ -46,7 +45,9 @@ class GeofenceLocationEvent {
       required this.entered,
       required this.dwelled,
       required this.exited,
-      this.radius});
+      this.radius,
+      this.ok = true,
+      this.userId});
 
   GeofenceLocationEvent.fromJson(Map data) {
     this.eventId = data['eventId'];
@@ -55,10 +56,11 @@ class GeofenceLocationEvent {
     this.dwelled = data['dwelled'];
     this.exited = data['exited'];
     this.radius = data['radius'];
+    this.userId = data['userId'];
+    this.ok = data['ok'];
 
     if (data['geofenceLocation'] != null) {
-      this.geofenceLocation =
-          GeofenceLocation.fromJson(data['geofenceLocation']);
+      this.geofenceLocation = GeofenceLocation.fromJson(data['geofenceLocation']);
     }
   }
 
@@ -69,8 +71,9 @@ class GeofenceLocationEvent {
         'dwelled': dwelled,
         'exited': exited,
         'radius': radius,
-        'geofenceLocation':
-            geofenceLocation == null ? null : geofenceLocation!.toJson()
+        'userId': userId,
+        'ok': ok,
+        'geofenceLocation': geofenceLocation == null ? null : geofenceLocation!.toJson()
       };
 }
 
