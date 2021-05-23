@@ -1,6 +1,8 @@
-upass_mobile_repo
-# UPASS Android and iOS apps
+upass_mobile_repo  
 
+# 🔷 🔷 🔷 UPASS Android and iOS apps 🔷 🔷 🔷  
+  
+   
 This repo contains the first skeleton app source code that implements base structures and services
 
 🔷 **Onboarding Components**
@@ -48,6 +50,7 @@ Display user activities on live/historical map and creation of dynamic geofences
 🔷 **QRCode Scanner and Reader for setting up tracking friend**  
 
 🔷 **Google Fonts Available to the App**  
+
 The app can utilize any of the fonts in the Google library:  
 
 https://fonts.google.com/
