@@ -1,13 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geofence_service/geofence_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:upass_mobile_repo/on_boarding/on_boarding_main.dart';
-import 'package:upass_mobile_repo/scanning/scannee.dart';
 import 'package:upass_mobile_repo/services/hive_db.dart';
 import 'package:upass_mobile_repo/util/notifications_service.dart';
-import 'package:upass_mobile_repo/ui/auth_tester.dart';
-import  'package:firebase_core/firebase_core.dart';
+
 import 'util/functions_and_shit.dart';
 
 const mm = '🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽🖐🏽 💙 UPASS Mobile App: 💙 ';
@@ -18,7 +17,7 @@ void main() async {
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
-        runApp(MyApp());
+    runApp(MyApp());
     // runApp(
     //   DevicePreview(
     //     enabled: kIsWeb ? false : !kReleaseMode,
@@ -26,7 +25,6 @@ void main() async {
     //   ),
     // );
   });
-
 
   await localDB.initializeHive();
   pp('$mm Firebase.initializeApp starting ............');
@@ -69,7 +67,7 @@ class MyApp extends StatelessWidget {
           notificationTitle: 'Geofence Builder is RUNNING!',
           notificationText: 'Tap here to navigate to the app',
           taskCallback: _taskCallback,
-          child: Scannee()),
+          child: OnBoardingMain()),
     );
   }
 

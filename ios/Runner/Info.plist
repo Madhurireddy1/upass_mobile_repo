@@ -80,5 +80,7 @@
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
 	<string>YES</string>
+	<key>NSCameraUsageDescription</key>
+    <string>A camera is needed to read friend QRcode</string>
 </dict>
 </plist>

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:upass_mobile_repo/data_models/user.dart';
 import 'package:upass_mobile_repo/util/functions.dart';
+import 'package:uuid/uuid.dart';
 
 class Scannee extends StatefulWidget {
   const Scannee({Key? key}) : super(key: key);
@@ -10,12 +12,25 @@ class Scannee extends StatefulWidget {
 }
 
 class _ScanneeState extends State<Scannee> {
+  var uuid = Uuid().v4();
+  User? fakeUser;
+  @override
+  void initState() {
+    super.initState();
+    fakeUser = User(
+        email: 'aubrey@aftarobot.com',
+        cellphone: '065 591  7675',
+        date: DateTime.now().toIso8601String(),
+        userId: uuid.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(('Get My Friend to Scan Me')),
+        title: Text(('Follow Me Now')),
       ),
+      backgroundColor: Colors.brown[100],
       body: Stack(
         children: [
           Center(
@@ -29,14 +44,16 @@ class _ScanneeState extends State<Scannee> {
                   child: Column(
                     children: [
                       Text(
-                        'Be Scanned!',
+                        'Scan Me!',
                         style: Styles.greyLabelMedium,
                       ),
                       SizedBox(
                         height: 8,
                       ),
                       QrImage(
-                        data: "1234567890",
+                        data: fakeUser == null
+                            ? ""
+                            : fakeUser!.toJson().toString(),
                         version: QrVersions.auto,
                         size: 240.0,
                       ),

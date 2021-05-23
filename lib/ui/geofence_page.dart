@@ -7,6 +7,8 @@ import 'package:flutter/rendering.dart';
 import 'package:geofence_service/geofence_service.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:upass_mobile_repo/data_models/geofence_location.dart';
+import 'package:upass_mobile_repo/scanning/scannee.dart';
+import 'package:upass_mobile_repo/scanning/scanner.dart';
 import 'package:upass_mobile_repo/services/cron_service.dart';
 import 'package:upass_mobile_repo/services/hive_db.dart';
 import 'package:upass_mobile_repo/services/service_le_geofence.dart';
@@ -145,6 +147,18 @@ class _GeofencePageState extends State<GeofencePage>
     _startFences();
   }
 
+  void _navigateToScannee() async {
+    pp('$mm ..... _navigateToMap  ....');
+    await Navigator.push(
+        context,
+        PageTransition(
+            type: PageTransitionType.scale,
+            alignment: Alignment.topLeft,
+            duration: Duration(milliseconds: 1000),
+            child: Scannee()));
+    _startFences();
+  }
+
   void _navigateToMap() async {
     pp('$mm ..... _navigateToMap  ....');
     _geofenceLocations = await Navigator.push(
@@ -173,7 +187,7 @@ class _GeofencePageState extends State<GeofencePage>
   }
 
   void _navigateToHealthData() async {
-    pp('$mm ..... _navigateToMap  ....');
+    pp('$mm ..... _navigateToHealthPage  ....');
     await Navigator.push(
         context,
         PageTransition(
@@ -185,6 +199,19 @@ class _GeofencePageState extends State<GeofencePage>
     _startFences();
   }
 
+  void _navigateToScanner() async {
+    pp('$mm ..... _navigateToScanner  ....');
+    await Navigator.push(
+        context,
+        PageTransition(
+            type: PageTransitionType.scale,
+            alignment: Alignment.topLeft,
+            duration: Duration(milliseconds: 1000),
+            child: Scanner()));
+
+    _startFences();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -192,7 +219,7 @@ class _GeofencePageState extends State<GeofencePage>
         backgroundColor: Colors.brown[100],
         elevation: 0,
         title: Text(
-          'UPASS Builder',
+          '',
           style: TextStyle(
               fontWeight: FontWeight.w300, color: Colors.black, fontSize: 14),
         ),
@@ -217,6 +244,24 @@ class _GeofencePageState extends State<GeofencePage>
                   onPressed: () {
                     _navigateToEvents();
                   }),
+          IconButton(
+              icon: Icon(
+                Icons.scanner,
+                size: 20,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                _navigateToScanner();
+              }),
+          IconButton(
+              icon: Icon(
+                Icons.person_add,
+                size: 20,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                _navigateToScannee();
+              }),
           IconButton(
               icon: Icon(
                 Icons.map,
