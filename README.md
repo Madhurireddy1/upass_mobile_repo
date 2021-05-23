@@ -9,13 +9,14 @@ These components provide the structure to display onboarding screens
 
 **SignUp / SignIn Components**
 
-These components provide signup via  
+These skeleton components will provide signup and signin via:  
 
 1. Facebook   
 2. Google   
 3. Twitter
 4. Email  
 5. Phone 
+6. Apple ID
 
 **Background Services**
 \

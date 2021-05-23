@@ -12,8 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.3
-  geofence_service: ^3.0.3
-  flutter_local_notifications: ^5.0.0+4
+  geofence_service: ^3.0.4
+  flutter_local_notifications: ^6.0.0
   ansicolor: ^2.0.1
   logging: ^1.0.1
   logging_appenders: ^1.0.0
@@ -29,7 +29,7 @@ dependencies:
   flutter_dotenv: ^4.0.0-nullsafety.1
   google_fonts: ^2.1.0
   connectivity: ^3.0.4
-  permission_handler: ^7.1.0
+  permission_handler: ^8.0.0+1
   page_transition: ^2.0.2
   health: ^3.0.6
   geocoding: ^2.0.0
