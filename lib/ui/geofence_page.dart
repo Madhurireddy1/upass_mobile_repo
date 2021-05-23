@@ -12,6 +12,7 @@ import 'package:upass_mobile_repo/scanning/scanner.dart';
 import 'package:upass_mobile_repo/services/cron_service.dart';
 import 'package:upass_mobile_repo/services/hive_db.dart';
 import 'package:upass_mobile_repo/services/service_le_geofence.dart';
+import 'package:upass_mobile_repo/settings/settings.dart';
 import 'package:upass_mobile_repo/util/functions.dart';
 import 'package:upass_mobile_repo/util/functions_and_shit.dart';
 import 'package:upass_mobile_repo/util/util.dart';
@@ -26,8 +27,7 @@ class GeofencePage extends StatefulWidget {
   _GeofencePageState createState() => _GeofencePageState();
 }
 
-class _GeofencePageState extends State<GeofencePage>
-    with SingleTickerProviderStateMixin {
+class _GeofencePageState extends State<GeofencePage> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   static const mm = '🌸 🌸 🌸 🌸 🌸 GeofencePage: ';
   List<GeofenceLocation> _geofenceLocations = [];
@@ -79,12 +79,9 @@ class _GeofencePageState extends State<GeofencePage>
 
   void _listen() {
     pp('$mm ..... _listen: 🍐 🍐 🍐 listenToBackgroundLocation and onConnectivityChanged ....  🍐 ');
-    _subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
+    _subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       p('$mm Got a new connectivity status! ${result.toString()}');
-      if (result == ConnectivityResult.mobile ||
-          result == ConnectivityResult.wifi) {
+      if (result == ConnectivityResult.mobile || result == ConnectivityResult.wifi) {
         setState(() {
           connected = true;
         });
@@ -212,6 +209,19 @@ class _GeofencePageState extends State<GeofencePage>
     _startFences();
   }
 
+  void _navigateToSettings() async {
+    pp('$mm ..... _navigateToSettings ....');
+    await Navigator.push(
+        context,
+        PageTransition(
+            type: PageTransitionType.scale,
+            alignment: Alignment.topLeft,
+            duration: Duration(milliseconds: 1000),
+            child: MySettingsPageMobile()));
+
+    _startFences();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -220,8 +230,7 @@ class _GeofencePageState extends State<GeofencePage>
         elevation: 0,
         title: Text(
           '',
-          style: TextStyle(
-              fontWeight: FontWeight.w300, color: Colors.black, fontSize: 14),
+          style: TextStyle(fontWeight: FontWeight.w300, color: Colors.black, fontSize: 14),
         ),
         actions: [
           _geofenceEvents.isEmpty
@@ -244,6 +253,15 @@ class _GeofencePageState extends State<GeofencePage>
                   onPressed: () {
                     _navigateToEvents();
                   }),
+          IconButton(
+              icon: Icon(
+                Icons.settings,
+                size: 20,
+                color: Colors.indigo,
+              ),
+              onPressed: () {
+                _navigateToSettings();
+              }),
           IconButton(
               icon: Icon(
                 Icons.scanner,
@@ -315,8 +333,7 @@ class _GeofencePageState extends State<GeofencePage>
                         Card(
                           elevation: 4,
                           child: _position == null
-                              ? Text('Geofence is to be loaded ..',
-                                  style: Theme.of(context).textTheme.caption)
+                              ? Text('Geofence is to be loaded ..', style: Theme.of(context).textTheme.caption)
                               : Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
@@ -325,8 +342,7 @@ class _GeofencePageState extends State<GeofencePage>
                                         height: 12,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             '${_geofenceLocations.length}',
@@ -337,9 +353,7 @@ class _GeofencePageState extends State<GeofencePage>
                                           ),
                                           Text(
                                             'Geofence Locations',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline6,
+                                            style: Theme.of(context).textTheme.headline6,
                                           ),
                                         ],
                                       ),
@@ -347,8 +361,7 @@ class _GeofencePageState extends State<GeofencePage>
                                         height: 12,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text('Network Connection'),
                                           SizedBox(
@@ -356,16 +369,14 @@ class _GeofencePageState extends State<GeofencePage>
                                           ),
                                           connected
                                               ? Container(
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.teal[600],
-                                                      shape: BoxShape.circle),
+                                                  decoration:
+                                                      BoxDecoration(color: Colors.teal[600], shape: BoxShape.circle),
                                                   width: 12,
                                                   height: 12,
                                                 )
                                               : Container(
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.pink[600],
-                                                      shape: BoxShape.circle),
+                                                  decoration:
+                                                      BoxDecoration(color: Colors.pink[600], shape: BoxShape.circle),
                                                   width: 12,
                                                   height: 12,
                                                 )
@@ -377,21 +388,16 @@ class _GeofencePageState extends State<GeofencePage>
                                       Column(
                                         children: [
                                           Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
-                                              SizedBox(
-                                                  width: 80,
-                                                  child: Text('Latitude')),
+                                              SizedBox(width: 80, child: Text('Latitude')),
                                               SizedBox(
                                                 width: 8,
                                               ),
                                               Text(
                                                 '${_position!.latitude}',
                                                 style: TextStyle(
-                                                    fontWeight: FontWeight.w900,
-                                                    color: Theme.of(context)
-                                                        .accentColor),
+                                                    fontWeight: FontWeight.w900, color: Theme.of(context).accentColor),
                                               ),
                                             ],
                                           ),
@@ -399,21 +405,16 @@ class _GeofencePageState extends State<GeofencePage>
                                             height: 8,
                                           ),
                                           Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
-                                              SizedBox(
-                                                  width: 80,
-                                                  child: Text('Longitude')),
+                                              SizedBox(width: 80, child: Text('Longitude')),
                                               SizedBox(
                                                 width: 8,
                                               ),
                                               Text(
                                                 '${_position!.longitude}',
                                                 style: TextStyle(
-                                                    fontWeight: FontWeight.w900,
-                                                    color: Theme.of(context)
-                                                        .primaryColor),
+                                                    fontWeight: FontWeight.w900, color: Theme.of(context).primaryColor),
                                               ),
                                             ],
                                           ),
@@ -571,8 +572,7 @@ class _GeofencePageState extends State<GeofencePage>
                                           height: 20,
                                         ),
                                         Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Text('${act.type}'),
                                             SizedBox(
@@ -617,8 +617,7 @@ class _GeofencePageState extends State<GeofencePage>
                             child: ListView.builder(
                                 itemCount: _locationMessages.length,
                                 itemBuilder: (_, index) {
-                                  var msg =
-                                      '${_locationMessages.elementAt(index)}';
+                                  var msg = '${_locationMessages.elementAt(index)}';
                                   return Row(
                                     children: [
                                       Icon(

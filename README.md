@@ -21,16 +21,17 @@ These components provide signup via
 \
 These services manage the business logic and data management\
 
-1. Geofencing Service
-2. Scheduler Service
-3. Activity Recognition
-4. Cloud Messaging Service
-5. Local Database Service
-6. Notification Service
+1. Geofencing Service  
+2. Scheduler Service  
+3. Activity Recognition  
+4. Cloud Messaging Service  
+5. Local Database Service  
+6. Notification Service  
+7. Networking Service  
 
 **Google Maps**  
 
-Display user activities on live/historical map
+Display user activities on live/historical map and creation of dynamic geofences
 
 1. Realtime Location
 2. Geofence Registration
@@ -41,6 +42,7 @@ Display user activities on live/historical map
 1. Privacy settings  
 2. Geofence settings  
 3. Notification settings  
+4. Authorities Access settings  
 
 **QRCode Scanner and Reader for setting up tracking friend**  
 
