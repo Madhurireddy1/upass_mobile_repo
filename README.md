@@ -44,3 +44,8 @@ Display user activities on live/historical map
 
 **QRCode Scanner and Reader for setting up tracking friend**  
 
+**Google Fonts Available to the App**  
+The app can utilize any of the fonts in the Google library:  
+
+https://fonts.google.com/
+

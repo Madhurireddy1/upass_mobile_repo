@@ -158,9 +158,11 @@ class _ScannerState extends State<Scanner> with SingleTickerProviderStateMixin {
 
   void _handleData() {
     pp('$mm handling the user data received from scan: 😡 $qrcode 😡 ');
+    scanController.resume();
     setState(() {
       showScanner = true;
       qrcode = null;
     });
+    pp('$mm state has been set : 😡 scanController.resume() has been run 😡 ');
   }
 }
