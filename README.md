@@ -49,3 +49,10 @@ The app can utilize any of the fonts in the Google library:
 
 https://fonts.google.com/
 
+**Cloud Accounts Required**  
+
+1. Google GCP + Firebase Project - Maps, Notifications (aka Cloud Messaging), Authentication etc.  
+2. Facebook (User signup and authentication api keys)  
+3. Twitter (User signup and authentication api keys)   
+4. Apple Developer Account  
+
