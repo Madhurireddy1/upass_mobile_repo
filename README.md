@@ -3,11 +3,11 @@ upass_mobile_repo
 
 This repo contains the first skeleton app source code that implements base structures and services
 
-**Onboarding Components**
+🔷 **Onboarding Components**
 
 These components provide the structure to display onboarding screens
 
-**SignUp / SignIn Components**
+🔷 **SignUp / SignIn Components**
 
 These skeleton components will provide signup and signin via:  
 
@@ -18,7 +18,7 @@ These skeleton components will provide signup and signin via:
 5. Phone 
 6. Apple ID
 
-**Background Services**
+🔷 **Background Services**
 \
 These services manage the business logic and data management\
 
@@ -30,7 +30,7 @@ These services manage the business logic and data management\
 6. Notification Service  
 7. Networking Service  
 
-**Google Maps**  
+🔷 **Google Maps**  
 
 Display user activities on live/historical map and creation of dynamic geofences
 
@@ -38,28 +38,28 @@ Display user activities on live/historical map and creation of dynamic geofences
 2. Geofence Registration
 3. Location Datastore
 
-**User Settings** 
+🔷 **User Settings** 
 
 1. Privacy settings  
 2. Geofence settings  
 3. Notification settings  
 4. Authorities Access settings  
 
-**QRCode Scanner and Reader for setting up tracking friend**  
+🔷 **QRCode Scanner and Reader for setting up tracking friend**  
 
-**Google Fonts Available to the App**  
+🔷 **Google Fonts Available to the App**  
 The app can utilize any of the fonts in the Google library:  
 
 https://fonts.google.com/
 
-**Cloud Accounts Required**  
+🔷 **Cloud Accounts Required**  
 
 1. Google GCP + Firebase Project - Maps, Notifications (aka Cloud Messaging), Authentication etc.  
 2. Facebook (User signup and authentication api keys)  
 3. Twitter (User signup and authentication api keys)   
 4. Apple Developer Account  
 
-**Devices Required for Development and Testing**  
+🔷 **Devices Required for Development and Testing**  
 1. iPhone
 2. Android phone  
 3. iPad
