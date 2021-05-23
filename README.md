@@ -56,3 +56,8 @@ https://fonts.google.com/
 3. Twitter (User signup and authentication api keys)   
 4. Apple Developer Account  
 
+**Devices Required for Development and Testing**  
+1. iPhone
+2. Android phone  
+3. iPad
+
