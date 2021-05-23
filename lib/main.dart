@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:geofence_service/geofence_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:upass_mobile_repo/on_boarding/on_boarding_main.dart';
+import 'package:upass_mobile_repo/scanning/scannee.dart';
 import 'package:upass_mobile_repo/services/hive_db.dart';
 import 'package:upass_mobile_repo/util/notifications_service.dart';
 import 'package:upass_mobile_repo/ui/auth_tester.dart';
@@ -68,7 +69,7 @@ class MyApp extends StatelessWidget {
           notificationTitle: 'Geofence Builder is RUNNING!',
           notificationText: 'Tap here to navigate to the app',
           taskCallback: _taskCallback,
-          child: OnBoardingMain()),
+          child: Scannee()),
     );
   }
 

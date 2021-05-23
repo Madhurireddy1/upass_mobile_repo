@@ -42,3 +42,5 @@ Display user activities on live/historical map
 2. Geofence settings  
 3. Notification settings  
 
+**QRCode Scanner and Reader for setting up tracking friend**  
+
