@@ -2,25 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 import 'package:upass_mobile_repo/ui/notif_receiver.dart';
 
 import 'functions_and_shit.dart';
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 final BehaviorSubject<ReceivedNotification> didReceiveLocalNotificationSubject =
     BehaviorSubject<ReceivedNotification>();
 
-final BehaviorSubject<String?> selectNotificationSubject =
-    BehaviorSubject<String?>();
+final BehaviorSubject<String?> selectNotificationSubject = BehaviorSubject<String?>();
 
-const MethodChannel platform =
-    MethodChannel('boha.dev/flutter_local_notifications_example');
+const MethodChannel platform = MethodChannel('boha.dev/flutter_local_notifications_example');
 
 class ReceivedNotification {
   ReceivedNotification({
@@ -51,8 +46,7 @@ class NotificationService {
 
   void requestPermissions() {
     flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
         ?.requestPermissions(
           alert: true,
           badge: true,
@@ -65,24 +59,19 @@ class NotificationService {
         await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
 
     pp('$mm _startConfiguring: 🍊 🍊 notificationAppLaunchDetails.toString() : ${notificationAppLaunchDetails.toString()} 🍊 🍊 ');
-    const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('ic_launcher');
+    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('ic_launcher');
 
     /// Note: permissions aren't requested here just to demonstrate that can be
     /// done later
 
-    final IOSInitializationSettings initializationSettingsIOS =
-        IOSInitializationSettings(
+    final IOSInitializationSettings initializationSettingsIOS = IOSInitializationSettings(
       requestAlertPermission: false,
       requestBadgePermission: false,
       requestSoundPermission: false,
-      onDidReceiveLocalNotification: (id, title, body, payload) =>
-          _onShitHappening(id, title!, body!, payload!),
+      onDidReceiveLocalNotification: (id, title, body, payload) => _onShitHappening(id, title!, body!, payload!),
     );
     final InitializationSettings initializationSettings =
-        InitializationSettings(
-            android: initializationSettingsAndroid,
-            iOS: initializationSettingsIOS);
+        InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
 
     pp('$mm _startConfiguring: 🍊 🍊 initializationSettings.toString() : ${initializationSettings.toString()} 🍊 🍊 ');
 
@@ -102,24 +91,19 @@ class NotificationService {
 
   Future<void> _configureLocalTimeZone() async {
     tz.initializeTimeZones();
-    final String? timeZoneName = await FlutterNativeTimezone.getLocalTimezone();
-    tz.setLocalLocation(tz.getLocation(timeZoneName!));
-    pp('$mm _configureLocalTimeZone: timeZoneName: 🌍 🌍 🌍 🌍  $timeZoneName 🌍 🌍 🌍 🌍');
+    // final String? timeZoneName = await FlutterNativeTimezone.getLocalTimezone();
+    // tz.setLocalLocation(tz.getLocation(timeZoneName!));
+    // pp('$mm _configureLocalTimeZone: timeZoneName: 🌍 🌍 🌍 🌍  $timeZoneName 🌍 🌍 🌍 🌍');
   }
 
   void _configureDidReceiveLocalNotificationSubject() {
     pp('$mm _configureDidReceiveLocalNotificationSubject starting .....  🍊 🍊 🍊 🍊 ');
-    didReceiveLocalNotificationSubject.stream
-        .listen((ReceivedNotification receivedNotification) async {
+    didReceiveLocalNotificationSubject.stream.listen((ReceivedNotification receivedNotification) async {
       await showDialog(
         context: context,
         builder: (BuildContext context) => CupertinoAlertDialog(
-          title: receivedNotification.title != null
-              ? Text(receivedNotification.title!)
-              : null,
-          content: receivedNotification.body != null
-              ? Text(receivedNotification.body!)
-              : null,
+          title: receivedNotification.title != null ? Text(receivedNotification.title!) : null,
+          content: receivedNotification.body != null ? Text(receivedNotification.body!) : null,
           actions: <Widget>[
             CupertinoDialogAction(
               isDefaultAction: true,
@@ -148,8 +132,7 @@ class NotificationService {
     });
   }
 
-  Future<String> onDidReceiveLocalNotification(
-      int id, String title, String body, String payload) async {
+  Future<String> onDidReceiveLocalNotification(int id, String title, String body, String payload) async {
     pp('$mm onDidReceiveLocalNotification:🍏 title: $title 🍏 payload: $payload 🍏 body: $body ');
     return payload;
   }

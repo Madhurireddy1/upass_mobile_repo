@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:twitter_login/entity/auth_result.dart';
+import 'package:twitter_login/twitter_login.dart';
 import 'package:upass_mobile_repo/data_models/user.dart' as upass;
 import 'package:upass_mobile_repo/util/functions_and_shit.dart';
 import 'package:upass_mobile_repo/util/prefs.dart';
@@ -63,17 +65,42 @@ class AuthService {
 
   Future<upass.User?> signInTwitter() async {
     pp('$mm Sign in with Twitter ....');
+    final TwitterLogin twitterLogin = TwitterLogin(
+        apiKey: 'YF7FiPpYaAiHJJ4WOrmX8iggq',
+        apiSecretKey: 'TC4WagNN31dfdK0L6rbe3NzJRDEquQk20Pz44rYS3kRyp33U7i',
+        redirectURI: 'https://money-platform-2021.firebaseapp.com/__/auth/handler');
+
+    final AuthResult loginResult = await twitterLogin.login();
+
+    pp('$mm Twitter has returned a loginResult: 🔴 🔴 ${loginResult.status.toString()}');
+    pp('$mm Twitter has returned a loginResult: 🔴 🔴 ${loginResult.errorMessage}');
+    if (loginResult.status.toString().contains('error')) {
+      throw Exception('Twitter Auth failed: ${loginResult.errorMessage}');
+    }
+
+    if (loginResult.authToken != null && loginResult.authTokenSecret != null) {
+      final twitterAuthCredential = TwitterAuthProvider.credential(
+        accessToken: loginResult.authToken!,
+        secret: loginResult.authTokenSecret!,
+      );
+      // Once signed in, return the UserCredential
+      var userCred = await auth.signInWithCredential(twitterAuthCredential);
+      var token = await getIdToken();
+      if (userCred.user != null && token != null) {
+        var user = _saveUser(uid: userCred.user!.uid, email: userCred.user!.email!, token: token);
+        return user;
+      } else {
+        throw Exception('Authentication failed');
+      }
+    } else {
+      throw Exception('Authentication failed');
+    }
 
     return null;
   }
 
   Future<upass.User?> signInWithPhone() async {
     pp('$mm Sign in with Phone ....');
-    return null;
-  }
-
-  Future<upass.User?> signInWithTwitter() async {
-    pp('$mm Sign in with Twitter ....');
     return null;
   }
 
@@ -135,14 +162,14 @@ class AuthService {
     }
   }
 
-  Future<upass.User> createUser({required String email, required String password}) async {
+  Future<upass.User> createUser({required String email, String? password}) async {
     try {
-      var result = await auth.createUserWithEmailAndPassword(email: email, password: password);
+      var result = await auth.createUserWithEmailAndPassword(email: email, password: password == null ? '' : password);
       if (result.user != null) {
         var token = await result.user!.getIdToken();
         upass.User mUser = await _saveUser(uid: result.user!.uid, email: email, token: token);
         pp('$mm ✅  ✅  ✅ Signing in with new user credentials ....');
-        auth.signInWithEmailAndPassword(email: email, password: password);
+        auth.signInWithEmailAndPassword(email: email, password: password == null ? '' : password);
         return mUser;
       } else {
         pp('$mm createUserWithEmailAndPassword failed: 👿 Null  user returned');
