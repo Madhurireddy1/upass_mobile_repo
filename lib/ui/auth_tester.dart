@@ -22,7 +22,12 @@ class _UpassAuthState extends State<UpassAuth> {
     return Scaffold(
       key: _key,
       appBar: AppBar(
-        title: Text('UPass Authentication'),
+        backgroundColor: Colors.brown[100],
+        elevation: 0,
+        title: Text(
+          'UPass Authentication',
+          style: Styles.blackBoldSmall,
+        ),
       ),
       backgroundColor: Colors.brown[100],
       body: Stack(
@@ -165,7 +170,8 @@ class _UpassAuthState extends State<UpassAuth> {
         type = 'Phone';
       });
     } catch (e) {
-      AppSnackBar.showErrorSnackBar(scaffoldKey: _key, message: 'Failed: $e');
+      pp('👿👿👿👿👿 _phoneSignIn:  $e 👿👿');
+      AppSnackBar.showErrorSnackBar(scaffoldKey: _key, color: Colors.pink[900], message: '$e');
     }
   }
 
@@ -225,7 +231,7 @@ class _UpassAuthState extends State<UpassAuth> {
         type = 'Email';
       });
     } catch (e) {
-      AppSnackBar.showErrorSnackBar(scaffoldKey: _key, message: 'Failed: $e');
+      AppSnackBar.showErrorSnackBar(scaffoldKey: _key, message: '$e');
     }
   }
 }

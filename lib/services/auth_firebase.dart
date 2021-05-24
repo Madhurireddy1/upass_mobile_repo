@@ -101,7 +101,7 @@ class AuthService {
 
   Future<upass.User?> signInWithPhone() async {
     pp('$mm Sign in with Phone ....');
-    return null;
+    throw 'Not implemented yet';
   }
 
   Future<upass.User?> signInWithGoogle() async {

@@ -20,6 +20,7 @@ import 'package:upass_mobile_repo/util/functions_and_shit.dart';
 import 'package:upass_mobile_repo/util/util.dart';
 
 import 'activity_map.dart';
+import 'auth_tester.dart';
 import 'events_page.dart';
 import 'health_page.dart';
 import 'map.dart';
@@ -199,6 +200,20 @@ class _GeofencePageState extends State<GeofencePage> with SingleTickerProviderSt
     _startFences();
   }
 
+  void _navigateToAuth() async {
+    pp('$mm ..... _navigateToMap  ....');
+    Navigator.push(
+        context,
+        PageTransition(
+            type: PageTransitionType.scale,
+            alignment: Alignment.topLeft,
+            duration: Duration(milliseconds: 1000),
+            child: UpassAuth()));
+
+    await _getEvents();
+    _startFences();
+  }
+
   void _navigateToActivityMap() async {
     pp('$mm ..... _navigateToActivityMap  ....');
     Navigator.push(
@@ -262,26 +277,16 @@ class _GeofencePageState extends State<GeofencePage> with SingleTickerProviderSt
           style: TextStyle(fontWeight: FontWeight.w300, color: Colors.black, fontSize: 14),
         ),
         actions: [
-          _geofenceEvents.isEmpty
-              ? IconButton(
-                  icon: Icon(
-                    Icons.refresh,
-                    size: 24,
-                    color: Colors.indigo,
-                  ),
-                  onPressed: () {
-                    _startFences();
-                    _getEvents();
-                  })
-              : IconButton(
-                  icon: Icon(
-                    Icons.event,
-                    size: 20,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    _navigateToEvents();
-                  }),
+          IconButton(
+              icon: Icon(
+                Icons.lock,
+                size: 24,
+                color: Colors.indigo,
+              ),
+              onPressed: () {
+                _navigateToAuth();
+              }),
+
           IconButton(
               icon: Icon(
                 Icons.settings,
@@ -318,15 +323,15 @@ class _GeofencePageState extends State<GeofencePage> with SingleTickerProviderSt
               onPressed: () {
                 _navigateToMap();
               }),
-          IconButton(
-              icon: Icon(
-                Icons.map_outlined,
-                size: 20,
-                color: Colors.pink,
-              ),
-              onPressed: () {
-                _navigateToActivityMap();
-              }),
+          // IconButton(
+          //     icon: Icon(
+          //       Icons.map_outlined,
+          //       size: 20,
+          //       color: Colors.pink,
+          //     ),
+          //     onPressed: () {
+          //       _navigateToActivityMap();
+          //     }),
           IconButton(
               icon: Icon(
                 Icons.directions_walk,
