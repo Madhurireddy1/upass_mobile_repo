@@ -153,17 +153,7 @@ class _UpassAuthState extends State<UpassAuth> {
 
   void _emailSignIn() async {
     pp('$mm Signing on with Email ....');
-    // user = await authService.signInWithEmail(email: 'aubrey@aftarobot.com', password: 'matimba23#');
-    try {
-      user = await authService.signInWithEmail(email: 'republican@aftarobot.com', password: 'matimba23#');
-
-      pp('🔴 🔴 Successfully authenticated with 🧡 EMAIL : ${user!.email!}');
-      setState(() {
-        type = 'Email';
-      });
-    } catch (e) {
-      AppSnackBar.showErrorSnackBar(scaffoldKey: _key, message: 'Failed: $e');
-    }
+    showEmailDialog();
   }
 
   void _phoneSignIn() async {
@@ -177,5 +167,115 @@ class _UpassAuthState extends State<UpassAuth> {
     } catch (e) {
       AppSnackBar.showErrorSnackBar(scaffoldKey: _key, message: 'Failed: $e');
     }
+  }
+
+  showEmailDialog() {
+    showDialog(
+      context: context, // <<----
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Enter User Details',
+                  style: Styles.greyLabelMedium,
+                ),
+                EmailAndPassword(onEmailChanged: onEmailChanged, onPasswordChanged: onPasswordChanged),
+                SizedBox(
+                  height: 8,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      _startAuth();
+                    },
+                    child: Text('Sign In')),
+                SizedBox(
+                  height: 12,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  String? email, password;
+  onEmailChanged(String p1) {
+    pp('$mm Email changed: $p1');
+    email = p1;
+  }
+
+  onPasswordChanged(String p1) {
+    pp('$mm Password changed: $p1');
+    password = p1;
+  }
+
+  void _startAuth() async {
+    pp('$mm starting email auth from dialog ...');
+    try {
+      user = await authService.signInWithEmail(email: email!, password: password!);
+      pp('🔴 🔴 Successfully authenticated with 🧡 EMAIL : ${user!.email!}');
+      setState(() {
+        type = 'Email';
+      });
+    } catch (e) {
+      AppSnackBar.showErrorSnackBar(scaffoldKey: _key, message: 'Failed: $e');
+    }
+  }
+}
+
+class EmailAndPassword extends StatelessWidget {
+  final Function(String) onEmailChanged;
+  final Function(String) onPasswordChanged;
+  const EmailAndPassword({Key? key, required this.onEmailChanged, required this.onPasswordChanged}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var emailController = TextEditingController();
+    var passwordController = TextEditingController();
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          TextFormField(
+            controller: emailController,
+            keyboardType: TextInputType.emailAddress,
+            maxLength: 80,
+            onChanged: _onEmailChanged,
+            decoration: InputDecoration(
+              hintText: 'Enter Email Address',
+              labelText: 'Email Address',
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          TextFormField(
+            controller: passwordController,
+            keyboardType: TextInputType.emailAddress,
+            maxLength: 80,
+            onChanged: _onPasswordChanged,
+            decoration: InputDecoration(
+              hintText: 'Enter Strong password',
+              labelText: 'Password',
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  void _onEmailChanged(String value) {
+    onEmailChanged(value);
+  }
+
+  void _onPasswordChanged(String value) {
+    onPasswordChanged(value);
   }
 }
