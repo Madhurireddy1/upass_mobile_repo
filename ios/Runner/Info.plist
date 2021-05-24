@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>FacebookAppID</key>
+    <string>847169496152207</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -29,9 +31,11 @@
 			<string>com.upass.upassMobileRepo</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.189690056754-0oi8njjbto4ev22448reo9qie27bj1i6</string>
+                <string>fb847169496152207</string>
+                <string>com.googleusercontent.apps.189690056754-0oi8njjbto4ev22448reo9qie27bj1i6</string>
 			</array>
 		</dict>
+
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>

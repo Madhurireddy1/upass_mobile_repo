@@ -20,12 +20,15 @@ class Prefs {
       return b;
     }
   }
-  static void saveUser(User user)  async {
+
+  static Future saveUser(User user) async {
     final preferences = await SharedPreferences.getInstance();
     var mJson = jsonEncode(user.toJson());
     await preferences.setString('user', mJson);
     print('🔵 🔵 🔵 Prefs: user saved: ${user.toJson()} 🍎 🍎 ');
+    return null;
   }
+
   static Future<User?> getUser() async {
     final preferences = await SharedPreferences.getInstance();
     var b = preferences.getString('user');

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ansicolor/ansicolor.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
@@ -40,6 +42,13 @@ bool get isInProfileMode {
   }
 
   return _inProfileMode;
+}
+
+String prettyPrint(Map json) {
+  JsonEncoder encoder = new JsonEncoder.withIndent('  ');
+  String pretty = encoder.convert(json);
+  pp('PrettyPrint: $pretty');
+  return pretty;
 }
 
 final penFinest = AnsiPen()
@@ -97,8 +106,7 @@ void initLog() {
       }
     });
 
-    PrintAppender(formatter: const ColorFormatter())
-        .attachToLogger(Logger.root);
+    PrintAppender(formatter: const ColorFormatter()).attachToLogger(Logger.root);
   }
 
   if (isInReleaseMode) {

@@ -4,8 +4,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'util.dart';
-
 List<String> logs = [];
 bool isBusy = false;
 
@@ -71,8 +69,7 @@ Color? getRandomPastelColor() {
   _colors.add(Colors.brown.shade50);
   _colors.add(Colors.cyan.shade50);
 
-  _rand =
-      Random(new DateTime.now().millisecondsSinceEpoch * _rand.nextInt(10000));
+  _rand = Random(new DateTime.now().millisecondsSinceEpoch * _rand.nextInt(10000));
   int index = _rand.nextInt(_colors.length - 1);
   return _colors.elementAt(index);
 }
@@ -441,18 +438,6 @@ class Styles {
   static Color blue = Colors.blue;
 }
 
-prettyPrint(Map map, String name) {
-  print('$name \t{\n');
-  if (map != null) {
-    map.forEach((key, val) {
-      print('\t$key : $val ,\n');
-    });
-    print('}\n\n');
-  } else {
-    p('📍📍📍📍 prettyPrint: 📍📍📍📍📍📍📍📍 map is NULL - tag: $name 📍📍📍📍📍📍📍📍');
-  }
-}
-
 String getFormattedDateLongWithTime(String date, BuildContext context) {
   Locale myLocale = Localizations.localeOf(context);
 
@@ -497,8 +482,7 @@ String getFormattedDateLong(String date, BuildContext context) {
   try {
     if (date.contains('GMT')) {
       var mDate = getLocalDateFromGMT(date, context);
-      print(
-          '++++++++++++++ Formatted date with locale == ${format.format(mDate.toLocal())}');
+      print('++++++++++++++ Formatted date with locale == ${format.format(mDate.toLocal())}');
       return format.format(mDate.toLocal());
     } else {
       var mDate = DateTime.parse(date);
@@ -517,8 +501,7 @@ String getFormattedDateShort(String date, BuildContext context) {
   try {
     if (date.contains('GMT')) {
       var mDate = getLocalDateFromGMT(date, context);
-      print(
-          '++++++++++++++ Formatted date with locale == ${format.format(mDate)}');
+      print('++++++++++++++ Formatted date with locale == ${format.format(mDate)}');
       return format.format(mDate);
     } else {
       var mDate = DateTime.parse(date);
@@ -537,8 +520,7 @@ String getFormattedDateShortest(String date, BuildContext context) {
   try {
     if (date.contains('GMT')) {
       var mDate = getLocalDateFromGMT(date, context);
-      print(
-          '++++++++++++++ Formatted date with locale == ${format.format(mDate)}');
+      print('++++++++++++++ Formatted date with locale == ${format.format(mDate)}');
       return format.format(mDate);
     } else {
       var mDate = DateTime.parse(date);
