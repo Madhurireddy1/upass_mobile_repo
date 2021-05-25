@@ -46,13 +46,6 @@ class MessagingService {
     return true;
   }
 
-  void addTopic({required String topic}) async {}
 
-  Future? sendLocationToBackend({required GeofenceLocationEvent event}) async {
-    pp('$mm sendLocationToBackend ....');
-  }
 
-  Future? sendLocationToMessaging({required GeofenceLocationEvent event}) async {
-    pp('$mm sendLocationToMessaging ....');
-  }
 }

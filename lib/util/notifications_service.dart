@@ -7,7 +7,9 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:timezone/data/latest.dart' as tz;
+import 'package:upass_mobile_repo/data_models/user.dart';
 import 'package:upass_mobile_repo/ui/notif_receiver.dart';
+import 'package:upass_mobile_repo/util/prefs.dart';
 
 import 'functions_and_shit.dart';
 
@@ -61,6 +63,7 @@ class NotificationService {
     this.context = context;
     pp('$mm NotificationService construction: 🍊 🍊 context passed in: ${context.toString()}');
     _startConfiguring();
+    subscribeToTopics();
   }
 
   void requestPermissions() {
@@ -146,6 +149,28 @@ class NotificationService {
     pp('$mm _configureLocalTimeZone: timeZoneName: 🌍 🌍 🌍 🌍  $timeZoneName 🌍 🌍 🌍 🌍');
   }
 
+  FirebaseMessaging _messaging = FirebaseMessaging.instance;
+  static const generalTopic = 'generalTopic';
+  User? user;
+
+  Future subscribeToTopics() async {
+    pp('\n$mm ... Subscribing to the famous General topic + a personal one ... ');
+    await _messaging.subscribeToTopic(generalTopic);
+    pp('$mm ... Subscribed to the famous General topic ... ');
+    await _subscribeToPersonalTopic();
+  }
+
+  Future<void> _subscribeToPersonalTopic() async {
+    var user = await Prefs.getUser();
+    if (user != null) {
+      var topic = 'personal_${user.userId}';
+      await _messaging.subscribeToTopic(topic);
+      pp('$mm ... Subscribed to a personal topic ... 🔷 $topic 🔷\n');
+    } else {
+      pp('$mm ... Subscribing to a personal topic failed, user is NULL\n');
+    }
+  }
+
   void _configureDidReceiveLocalNotificationSubject() {
     pp('$mm _configureDidReceiveLocalNotificationSubject starting .....  🍊 🍊 🍊 🍊 ');
     didReceiveLocalNotificationSubject.stream.listen((ReceivedNotification receivedNotification) async {
@@ -176,20 +201,7 @@ class NotificationService {
     });
   }
 
-  Future<void> sendPushMessage() async {
-    // try {
-    //   await http.post(
-    //     Uri.parse('https://api.rnfirebase.io/messaging/send'),
-    //     headers: <String, String>{
-    //       'Content-Type': 'application/json; charset=UTF-8',
-    //     },
-    //     body: constructFCMPayload(_token),
-    //   );
-    //   print('FCM request for device sent!');
-    // } catch (e) {
-    //   print(e);
-    // }
-  }
+  void addTopic({required User user}) async {}
 
   void configureSelectNotificationSubject(BuildContext context) {
     selectNotificationSubject.stream.listen((String? payload) async {
@@ -207,7 +219,7 @@ class NotificationService {
     return null;
   }
 
-  static const mm = '🏈 🏈 🏈 🏈 🏈 NotificationService: ';
+  static const mm = '🔊 🔊 🔊 🔊 🔊 🔊 🔷 NotificationService: 🔷 ';
 
   Future _onShitHappening(int id, String title, String body, String payload) {
     pp('$mm _onShitHappening: title: $title body: $body payload: $payload ...');

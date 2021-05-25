@@ -7,7 +7,6 @@ import 'package:geofence_service/geofence_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:upass_mobile_repo/on_boarding/on_boarding_main.dart';
 import 'package:upass_mobile_repo/services/hive_db.dart';
-import 'package:upass_mobile_repo/services/messaging_service.dart';
 import 'package:upass_mobile_repo/util/notifications_service.dart';
 
 import 'util/functions_and_shit.dart';
@@ -44,9 +43,6 @@ void main() async {
   });
 
   await localDB.initializeHive();
-
-  await messagingService.initialize();
-  pp('$mm messagingService initialized 🍎 🍎 OK 🍎 🍎 ');
   pp('$mm Stanley Black & Decker UPASS Mobile App started 🍎 🍎 OK 🍎 🍎 ');
 }
 
