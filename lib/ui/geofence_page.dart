@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geofence_service/geofence_service.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:upass_mobile_repo/data_models/geofence_location.dart';
@@ -17,6 +19,8 @@ import 'package:upass_mobile_repo/services/service_le_geofence.dart';
 import 'package:upass_mobile_repo/settings/settings.dart';
 import 'package:upass_mobile_repo/util/functions.dart';
 import 'package:upass_mobile_repo/util/functions_and_shit.dart';
+import 'package:upass_mobile_repo/util/notifications_service.dart';
+import 'package:upass_mobile_repo/util/snack.dart';
 import 'package:upass_mobile_repo/util/util.dart';
 
 import 'activity_map.dart';
@@ -34,6 +38,8 @@ class _GeofencePageState extends State<GeofencePage> with SingleTickerProviderSt
   late AnimationController _controller;
   static const mm = '🌸 🌸 🌸 🌸 🌸 GeofencePage: ';
   List<GeofenceLocation> _geofenceLocations = [];
+  var _key = GlobalKey<ScaffoldState>();
+  FToast fToast = FToast();
   @override
   void initState() {
     _controller = AnimationController(vsync: this);
@@ -42,6 +48,7 @@ class _GeofencePageState extends State<GeofencePage> with SingleTickerProviderSt
     initLog();
     logger.info('$mm ........... Geofence Builder has started ...');
     _checkConnectivity();
+    fToast.init(context);
   }
 
   var _locationMessages = <String>[];
@@ -77,10 +84,91 @@ class _GeofencePageState extends State<GeofencePage> with SingleTickerProviderSt
     if (connected) {
       _checkUser();
       _listen();
+      _setupNotificationService();
       await _startFences();
       await _getEvents();
     }
     setState(() {});
+  }
+
+  void _setupNotificationService() {
+    notificationService = NotificationService(context, _onFCMMessage);
+    pp('$mm NotificationService constructed ... 🍎 and hopefully initialized 🍎 $mm');
+  }
+
+  void _onFCMMessage(RemoteMessage message) {
+    pp('$mm _onFCMMessage: message arrived in GeofencePage ... ${message.data}');
+    String type = message.data['type'];
+    // ignore: unnecessary_null_comparison
+    if (type == null) {
+      pp('$mm _onFCMMessage: 🍎 🍎 UNKNOWN type message arrived ${message.data['title']}');
+      return;
+    }
+
+    switch (type) {
+      case 'GENERAL':
+        pp('$mm _onFCMMessage: 🍎 🍎 GENERAL message arrived ☹️ ${message.notification!.title!} ☹️');
+        AppSnackBar.showSnackBar(
+            scaffoldKey: _key,
+            message: message.notification!.title!,
+            textColor: Colors.amber,
+            backgroundColor: Colors.black);
+        _showToast(message);
+        break;
+      case 'PERSONAL':
+        pp('$mm _onFCMMessage: 🔵 🔵 PERSONAL message arrived ☹️ ${message.notification!.title!} ☹️');
+        AppSnackBar.showSnackBar(
+            scaffoldKey: _key,
+            message: message.notification!.title!,
+            textColor: Colors.blue,
+            backgroundColor: Colors.black);
+        _showToast(message);
+        break;
+    }
+  }
+
+  _showToast(RemoteMessage message) {
+    pp('$mm ... ☹️☹️☹️☹️☹️☹️☹️☹️ trying show a TOAST .... ☹️');
+    Widget toast = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: Colors.white,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.message_rounded),
+          SizedBox(
+            width: 4.0,
+          ),
+          Flexible(
+            child: Text(
+              '${message.notification!.title}',
+              style: Styles.blackBoldSmall,
+            ),
+          ),
+        ],
+      ),
+    );
+
+    fToast.showToast(
+      child: toast,
+      gravity: ToastGravity.CENTER,
+      toastDuration: Duration(seconds: 10),
+    );
+
+    // Custom Toast Position
+    fToast.showToast(
+        child: toast,
+        toastDuration: Duration(seconds: 2),
+        positionedToastBuilder: (context, child) {
+          return Positioned(
+            child: child,
+            top: 16.0,
+            left: 16.0,
+          );
+        });
   }
 
   void _listen() {
@@ -269,6 +357,7 @@ class _GeofencePageState extends State<GeofencePage> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
       appBar: AppBar(
         backgroundColor: Colors.brown[100],
         elevation: 0,

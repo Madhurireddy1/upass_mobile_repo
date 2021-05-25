@@ -58,13 +58,18 @@ late NotificationService notificationService;
 
 class NotificationService {
   late BuildContext context;
+  late Function(RemoteMessage) onFCMMessage;
 
-  NotificationService(BuildContext context) {
+  NotificationService(BuildContext context, Function(RemoteMessage) onFCMMessage) {
     this.context = context;
+    this.onFCMMessage = onFCMMessage;
     pp('$mm NotificationService construction: 🍊 🍊 context passed in: ${context.toString()}');
     _startConfiguring();
     subscribeToTopics();
   }
+  FirebaseMessaging _messaging = FirebaseMessaging.instance;
+  static const generalTopic = 'generalTopic';
+  User? user;
 
   void requestPermissions() {
     flutterLocalNotificationsPlugin
@@ -113,11 +118,12 @@ class NotificationService {
   }
 
   Future _listenUp() async {
-    pp('$mm _listenUp : 💙 set up FirebaseMessaging.onMessage listener ..... 💙 💙 💙');
+    pp('$mm _listenUp : 💙 ..... set up FirebaseMessaging.onMessage listener ..... 💙 💙 💙');
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       pp('$mm _listenUp : 💙 onMessage listener FIRED: message: ${message.senderId} - ${message.data}.....');
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
+      onFCMMessage(message);
       if (notification != null && android != null) {
         pp('$mm _listenUp : handle Android notification here 💙 ');
         flutterLocalNotificationsPlugin.show(
@@ -148,10 +154,6 @@ class NotificationService {
     final String? timeZoneName = await FlutterNativeTimezone.getLocalTimezone();
     pp('$mm _configureLocalTimeZone: timeZoneName: 🌍 🌍 🌍 🌍  $timeZoneName 🌍 🌍 🌍 🌍');
   }
-
-  FirebaseMessaging _messaging = FirebaseMessaging.instance;
-  static const generalTopic = 'generalTopic';
-  User? user;
 
   Future subscribeToTopics() async {
     pp('\n$mm ... Subscribing to the famous General topic + a personal one ... ');
@@ -200,8 +202,6 @@ class NotificationService {
       );
     });
   }
-
-  void addTopic({required User user}) async {}
 
   void configureSelectNotificationSubject(BuildContext context) {
     selectNotificationSubject.stream.listen((String? payload) async {

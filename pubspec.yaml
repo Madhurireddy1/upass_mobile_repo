@@ -54,6 +54,7 @@ dependencies:
   images_picker: ^1.2.4
   overlay_support: ^1.2.1
   twitter_login: ^3.0.8
+  fluttertoast: ^8.0.7
 
 dev_dependencies:
   flutter_test:

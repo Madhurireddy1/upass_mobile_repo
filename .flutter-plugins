@@ -23,6 +23,7 @@ flutter_inappwebview=/Users/mac/Documents/flutter/.pub-cache/hosted/pub.dartlang
 flutter_local_notifications=/Users/mac/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_local_notifications-6.0.0/
 flutter_native_timezone=/Users/mac/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_native_timezone-1.0.10/
 flutter_plugin_android_lifecycle=/Users/mac/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.1/
+fluttertoast=/Users/mac/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.0.7/
 geocoding=/Users/mac/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/geocoding-2.0.0/
 geofence_service=/Users/mac/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/geofence_service-3.0.4/
 geolocator=/Users/mac/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator-7.0.3/

@@ -50,8 +50,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    notificationService = NotificationService(context);
-    pp('$mm NotificationService constructed ... 🍎 and hopefully initialized 🍎 $mm');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // locale: DevicePreview.locale(context),
