@@ -97,7 +97,9 @@ class _GeofencePageState extends State<GeofencePage> with SingleTickerProviderSt
   }
 
   void _onFCMMessage(RemoteMessage message) {
-    pp('$mm _onFCMMessage: message arrived in GeofencePage ... ${message.data}');
+    pp('$mm _onFCMMessage: message arrived in GeofencePage ... title: ${message.notification!.title!}');
+    pp('$mm _onFCMMessage: message arrived in GeofencePage ... body: ${message.notification!.body!}');
+    pp('$mm _onFCMMessage: message arrived in GeofencePage ... message data: ${prettyPrint(message.data)}');
     String type = message.data['type'];
     // ignore: unnecessary_null_comparison
     if (type == null) {

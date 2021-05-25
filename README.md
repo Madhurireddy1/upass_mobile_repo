@@ -67,6 +67,11 @@ https://fonts.google.com/
 2. Android phone  
 3. iPad
 
+🔷 **APP DISTRIBUTION**
+
+Firebase App Distribution for Testing and Quality Assurance
+
+
 **USEFUL STUFF**  
 
 Cloud Messaging stuff for iOS - https://firebase.flutter.dev/docs/messaging/apple-integration/   

@@ -52,8 +52,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // locale: DevicePreview.locale(context),
-      // builder: DevicePreview.appBuilder,
       theme: ThemeData(
         primarySwatch: Colors.indigo,
         textTheme: GoogleFonts.montserratAlternatesTextTheme(
@@ -75,8 +73,8 @@ class MyApp extends StatelessWidget {
                   'This notification appears when the Geofence Builder service is running in the background.',
               channelImportance: NotificationChannelImportance.LOW,
               priority: NotificationPriority.LOW),
-          notificationTitle: 'Geofence Builder is RUNNING!',
-          notificationText: 'Tap here to navigate to the app',
+          notificationTitle: '💪 💪 💪 Geofence Builder is RUNNING! 💪',
+          notificationText: 'Tap here to navigate to UPASS, thank you very much!',
           taskCallback: _taskCallback,
           child: OnBoardingMain()),
     );
