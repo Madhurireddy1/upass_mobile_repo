@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:upass_mobile_repo/data_models/user.dart';
 
+import 'functions_and_shit.dart';
+
 class Prefs {
   static void setThemeIndex(int index) async {
     final preferences = await SharedPreferences.getInstance();
@@ -25,7 +27,7 @@ class Prefs {
     final preferences = await SharedPreferences.getInstance();
     var mJson = jsonEncode(user.toJson());
     await preferences.setString('user', mJson);
-    print('🔵 🔵 🔵 Prefs: user saved: ${user.toJson()} 🍎 🍎 ');
+    pp('Prefs:  🔵 🔵 🔵 user saved: ${user.toJson()} 🍎 🍎 ');
     return null;
   }
 
@@ -36,7 +38,7 @@ class Prefs {
       return null;
     } else {
       var user = User.fromJson(jsonDecode(b));
-      print('🔵 🔵 🔵  user retrieved: ${user.toJson()} 🍏 🍏 ');
+      pp('Prefs: 🔵 🔵 🔵 user retrieved: ${user.toJson()} 🍏 🍏 ');
       return user;
     }
   }

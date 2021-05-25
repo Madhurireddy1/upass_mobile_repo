@@ -3,6 +3,7 @@ platform :ios, '12.0'
 # add the Firebase pod for Google Analytics
 # pod 'Firebase/Analytics'
 # pod 'Firebase/Core'
+# fuck!
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 

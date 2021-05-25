@@ -29,7 +29,7 @@ class MessagingService {
     _messaging.setAutoInitEnabled(true);
     user = await Prefs.getUser();
     if (user != null) {
-      pp('$mm ... User retrieved from sharedPrefs:  ${user!.toJson()} ... ');
+      pp('$mm ... User retrieved from sharedPrefs:  ${user!.email} ... ');
     } else {
       pp('$mm ... 👿👿👿👿👿 User not set up yet! 👿👿👿👿👿');
     }

@@ -67,3 +67,9 @@ https://fonts.google.com/
 2. Android phone  
 3. iPad
 
+**USEFUL STUFF**  
+
+Cloud Messaging stuff for iOS - https://firebase.flutter.dev/docs/messaging/apple-integration/   
+Remember to do this:  
+https://console.firebase.google.com/u/1/project/money-platform-2021/settings/cloudmessaging/ios:com.upass.upassMobileRepo
+
